@@ -60,7 +60,7 @@ public class FootballManager {
 			while((line = br.readLine()) != null) {
 				if(line.contains(".json")) {
 					Team team = LoadFromResources.loadTeam("/"+line);
-					System.err.println(team.getId());
+					setTeam(team);
 				}
 			}
 		} catch (IOException e) {

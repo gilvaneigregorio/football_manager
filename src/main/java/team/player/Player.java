@@ -60,5 +60,52 @@ public class Player {
 		return true;
 	}
 	
+	public int getGameScore(){
+		int positionScore = 0;
+		
+		if(position == PlayerPosition.GOALKEEPER) {
+			positionScore = (int) ((attribute.getAgility()+attribute.getStrength()+attribute.getStamina())/3);
+		}
+		if(position == PlayerPosition.CENTER_DEFENSIVE_MIDFIELDER) {
+			positionScore = (int) ((attribute.getAgility() + attribute.getStrength()*3 + attribute.getStamina()*2)/6);
+		}
+		if(position == PlayerPosition.SIDE_BACK) {
+			positionScore = (int) ((attribute.getAgility()*2 + attribute.getStrength() + attribute.getStamina()*3)/6);
+		}
+		if(position == PlayerPosition.CENTER_DEFENSIVE_MIDFIELDER) {
+			positionScore = (int) ((attribute.getAgility() + attribute.getStrength()*2 + attribute.getStamina()*2)/5);
+		}
+		if(position == PlayerPosition.CENTER_ATTACKING_MIDFIELDER) {
+			positionScore = (int) ((attribute.getAgility()*2 + attribute.getStrength()*2 + attribute.getStamina())/5);
+		}
+		if(position == PlayerPosition.WING) {
+			positionScore = (int) ((attribute.getAgility()*3 +attribute.getStrength() + attribute.getStamina())/5);
+		}
+		if(position == PlayerPosition.STRIKER) {
+			positionScore = (int) ((attribute.getAgility()*3 + attribute.getStrength()*2 + attribute.getStamina())/6);
+		}
+
+		int fatigueScore = (positionScore*(fatigue+(MAXIMUM_FATIGUE_VALUE-fatigue)/2)/MAXIMUM_FATIGUE_VALUE);
+		
+		int moraleScore = 0;
+		if(morale == PlayerMorale.HORRIBLE) {
+			moraleScore = (int) (positionScore*0.5f);
+		}
+		if(morale == PlayerMorale.BAD) {
+			moraleScore = (int) (positionScore*0.75f);
+		}
+		if(morale == PlayerMorale.OK) {
+			moraleScore = (int) (positionScore*1f);
+		}
+		if(morale == PlayerMorale.GOOD) {
+			moraleScore = (int) (positionScore*1.25f);
+		}
+		if(morale == PlayerMorale.EXCELENT) {
+			moraleScore = (int) (positionScore*1.5f);
+		}
+		
+		return (positionScore+fatigueScore+moraleScore)/3;
+	}
+	
 }
 
